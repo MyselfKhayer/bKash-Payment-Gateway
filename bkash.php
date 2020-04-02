@@ -246,14 +246,14 @@ function bkash_payment_process(){
     $match_number = isset($bkash_number) ? $bkash_number : '';
     $match_id = isset($bkash_transaction_id) ? $bkash_transaction_id : '';
 
-    $validate_number = preg_match( '/^01[5-9]\d{8}$/', $match_number );
+    $validate_number = preg_match( '/^01[3-9]\d{8}$/', $match_number );
     $validate_id = preg_match( '/^[0-9A-Z]{10}$/',  $match_id );
 
     if( !isset($bkash_number) || empty($bkash_number) )
         wc_add_notice( __( 'Please add your mobile number', 'bpg'), 'error' );
 
 	if( !empty($bkash_number) && $validate_number == false )
-        wc_add_notice( __( 'Incorrect mobile number. It must be 11 digit, starts with 015 / 016 / 017 / 018 / 019', 'bpg'), 'error' );
+        wc_add_notice( __( 'Incorrect mobile number. It must be 11 digit, starts with 013 / 014 / 015 / 016 / 017 / 018 / 019', 'bpg'), 'error' );
 
     if( !isset($bkash_transaction_id) || empty($bkash_transaction_id) )
         wc_add_notice( __( 'Please enter your bKash Transaction ID', 'bpg' ), 'error' );
