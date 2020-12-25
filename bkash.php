@@ -105,8 +105,8 @@ function bkash_plugin_activation(){
 				'bkash_charge' 	=>	array(
 					'title'			=> __( 'Enable bKash Charge', $this->domain ),
 					'type' 			=> 'checkbox',
-					'label'			=> __( 'Add 2% bKash "Send Money" charge to net price', $this->domain ),
-					'description' 	=> __( 'If cart total is upto 1000 then customer have to pay ( 1000 + 20 ) = 1020. Here 20 is bKash send money charge', $this->domain ),
+					'label'			=> __( 'Add 1.85% bKash "Send Money" charge to net price', $this->domain ),
+					'description' 	=> __( 'If cart total is upto 1000 then customer have to pay ( 1000 + 18.50 ) = 1018.50 Here 18.50 is bKash send money charge', $this->domain ),
 					'default'		=> 'no',
 					'desc_tip'    	=> true
 				),						
@@ -124,7 +124,7 @@ function bkash_plugin_activation(){
 		public function payment_fields(){
 
 			global $woocommerce;
-			$bkash_charge = ($this->bkash_charge == 'yes') ? __(' Also note that 2% bKash "SEND MONEY" cost will be added with net price. Total amount you need to send us at', $this->domain ). ' ' . get_woocommerce_currency_symbol() . $woocommerce->cart->total : '';
+			$bkash_charge = ($this->bkash_charge == 'yes') ? __(' Also note that 1.85% bKash "SEND MONEY" cost will be added with net price. Total amount you need to send us at', $this->domain ). ' ' . get_woocommerce_currency_symbol() . $woocommerce->cart->total : '';
 			echo wpautop( wptexturize( __( $this->description, $this->domain ) ) . $bkash_charge  );
 			echo wpautop( wptexturize( "bKash ".$this->number_type." Number : ".$this->bkash_number ) );
 
@@ -220,7 +220,7 @@ if( $bkash_charge['bkash_charge'] == 'yes' ){
 				return;
 
 			if ( $current_gateway_id =='bkash' ) {
-				$percentage = 0.02;
+				$percentage = 0.0185;
 				$surcharge = ( $woocommerce->cart->cart_contents_total + $woocommerce->cart->shipping_total ) * $percentage;	
 				$woocommerce->cart->add_fee( __('bKash Charge', 'bpg'), $surcharge, true, '' ); 
 			}
